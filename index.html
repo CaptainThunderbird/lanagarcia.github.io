@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lana — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14131F;
+    --paper:#FBF6EA;
+    --coral:#FF5A4E;
+    --pulse:#F5C518;
+    --leaf:#3FA66B;
+    --slate:#2B3A55;
+    --paper-dim:#F0EADA;
+    --ink-soft:rgba(20,19,31,0.7);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    overflow-x:hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:600; letter-spacing:-0.01em;}
+
+  .mono{font-family:'JetBrains Mono', monospace;}
+
+  a{color:inherit;}
+
+  :focus-visible{
+    outline:3px solid var(--coral);
+    outline-offset:3px;
+  }
+
+  /* ===== Texture ===== */
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:1; opacity:0.035; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ===== Nav ===== */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px;
+    background:rgba(251,246,234,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:2px solid var(--ink);
+  }
+  .nav-mark{font-family:'Fraunces', serif; font-weight:700; font-size:1.15rem;}
+  .nav-links{display:flex; gap:24px; list-style:none;}
+  .nav-links a{
+    font-family:'JetBrains Mono', monospace; font-size:0.8rem; text-transform:uppercase;
+    letter-spacing:0.05em; text-decoration:none; position:relative; padding-bottom:3px;
+  }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:0; width:0; height:2px; background:var(--coral);
+    transition:width 0.25s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-toggle{display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:6px;}
+  .nav-toggle span{width:22px; height:2px; background:var(--ink); display:block;}
+
+  @media (max-width:760px){
+    .nav-links{
+      position:fixed; top:58px; left:0; right:0; background:var(--paper);
+      flex-direction:column; padding:18px 32px; gap:16px;
+      border-bottom:2px solid var(--ink);
+      transform:translateY(-110%); transition:transform 0.3s ease;
+    }
+    .nav-links.open{transform:translateY(0);}
+    .nav-toggle{display:flex;}
+  }
+
+  /* ===== Hero ===== */
+  .hero{
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:120px 32px 80px;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .hero-bg-shape{
+    position:absolute; top:-10%; right:-10%; width:55vw; height:55vw; max-width:640px; max-height:640px;
+    border-radius:50%; background:var(--pulse); opacity:0.5; filter:blur(2px);
+    z-index:0;
+  }
+
+  .stamp{
+    display:inline-flex; align-items:center; gap:8px;
+    border:2px solid var(--ink); border-radius:999px;
+    padding:7px 16px; margin-bottom:28px;
+    font-family:'JetBrains Mono', monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em;
+    background:var(--paper); position:relative; z-index:2;
+    transform:rotate(-2deg);
+    width:fit-content;
+  }
+  .stamp::before{content:"●"; color:var(--coral); font-size:0.6rem;}
+
+  .hero-name{
+    font-size:clamp(3.2rem, 11vw, 7.5rem);
+    line-height:0.95;
+    position:relative; z-index:2;
+    margin-bottom:18px;
+  }
+  .hero-name em{
+    font-style:italic; color:var(--coral);
+  }
+
+  .hero-tagline{
+    max-width:560px; font-size:clamp(1.05rem, 2vw, 1.3rem); line-height:1.5;
+    color:var(--ink-soft); position:relative; z-index:2; margin-bottom:36px;
+  }
+
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; position:relative; z-index:2;}
+
+  .btn{
+    font-family:'JetBrains Mono', monospace; font-size:0.82rem; text-transform:uppercase; letter-spacing:0.05em;
+    padding:13px 26px; border-radius:999px; border:2px solid var(--ink); text-decoration:none;
+    transition:transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    display:inline-block;
+  }
+  .btn-solid{background:var(--ink); color:var(--paper);}
+  .btn-solid:hover{background:var(--coral); border-color:var(--coral); transform:translate(-2px,-2px);}
+  .btn-outline{background:transparent; color:var(--ink);}
+  .btn-outline:hover{background:var(--ink); color:var(--paper); transform:translate(-2px,-2px);}
+
+  .scroll-cue{
+    position:absolute; bottom:28px; left:32px; font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; display:flex; align-items:center; gap:10px;
+    z-index:2;
+  }
+  .scroll-cue-line{width:1px; height:34px; background:var(--ink); animation:scrollpulse 1.8s ease-in-out infinite;}
+  @keyframes scrollpulse{0%,100%{opacity:0.2;} 50%{opacity:1;}}
+
+  /* ===== Section shell ===== */
+  section{padding:100px 32px; position:relative; max-width:1080px; margin:0 auto;}
+  .section-tag{
+    font-family:'JetBrains Mono', monospace; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.1em;
+    color:var(--coral); margin-bottom:14px; display:flex; align-items:center; gap:10px;
+  }
+  .section-tag::before{content:""; width:28px; height:2px; background:var(--coral); display:inline-block;}
+  .section-title{font-size:clamp(2rem, 4vw, 3.2rem); margin-bottom:48px; max-width:680px;}
+
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity 0.7s ease, transform 0.7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ===== About ===== */
+  #about{
+    background:var(--ink); color:var(--paper); border-radius:28px; margin:40px 24px;
+    max-width:none;
+  }
+  #about .section-title{color:var(--paper);}
+  #about .section-tag{color:var(--pulse);}
+  #about .section-tag::before{background:var(--pulse);}
+  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:start;}
+  .about-body p{font-size:1.05rem; line-height:1.75; color:rgba(251,246,234,0.85); margin-bottom:20px;}
+  .pull-quote{
+    font-family:'Fraunces', serif; font-style:italic; font-size:1.5rem; line-height:1.4;
+    border-left:3px solid var(--pulse); padding-left:20px; color:var(--paper);
+  }
+  @media (max-width:760px){.about-grid{grid-template-columns:1fr;}}
+
+  /* ===== Skills ===== */
+  .skill-cols{display:grid; grid-template-columns:repeat(2,1fr); gap:32px;}
+  .skill-card{
+    border:2px solid var(--ink); border-radius:18px; padding:28px;
+    background:var(--paper);
+  }
+  .skill-card h3{font-size:1.2rem; margin-bottom:6px;}
+  .skill-status{
+    font-family:'JetBrains Mono', monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em;
+    padding:3px 10px; border-radius:999px; display:inline-block; margin-bottom:16px;
+  }
+  .status-core{background:var(--leaf); color:var(--paper);}
+  .status-building{background:var(--pulse); color:var(--ink);}
+  .skill-card .chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-family:'JetBrains Mono', monospace; font-size:0.74rem; padding:6px 12px;
+    border:1.5px solid var(--ink); border-radius:999px; background:var(--paper-dim);
+  }
+  @media (max-width:760px){.skill-cols{grid-template-columns:1fr;}}
+
+  /* ===== Projects ===== */
+  .project-grid{display:grid; grid-template-columns:1fr; gap:28px;}
+  .project-card{
+    border:2px solid var(--ink); border-radius:22px; overflow:hidden;
+    display:grid; grid-template-columns:200px 1fr; background:var(--paper);
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .project-card:hover{transform:translate(-3px,-3px); box-shadow:8px 8px 0 var(--ink);}
+  .project-swatch{
+    display:flex; align-items:center; justify-content:center; padding:20px;
+    font-family:'Fraunces', serif; font-weight:700; font-size:2.4rem; color:var(--ink);
+    border-right:2px solid var(--ink); text-align:center; line-height:1.05;
+  }
+  .project-body{padding:28px;}
+  .project-card .tape{
+    font-family:'JetBrains Mono', monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.07em;
+    padding:3px 10px; border-radius:5px; display:inline-block; margin-bottom:10px; color:var(--ink);
+  }
+  .project-card h3{font-size:1.4rem; margin-bottom:10px;}
+  .project-card p{font-size:0.95rem; line-height:1.6; color:var(--ink-soft); margin-bottom:14px;}
+  .tagrow{display:flex; flex-wrap:wrap; gap:8px;}
+  @media (max-width:680px){
+    .project-card{grid-template-columns:1fr;}
+    .project-swatch{border-right:none; border-bottom:2px solid var(--ink); padding:24px;}
+  }
+
+  /* ===== Timeline ===== */
+  .timeline{border-left:2px solid var(--ink); margin-left:8px; padding-left:32px;}
+  .tl-item{position:relative; padding-bottom:40px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:""; position:absolute; left:-39px; top:4px; width:14px; height:14px; border-radius:50%;
+    background:var(--coral); border:2px solid var(--ink);
+  }
+  .tl-date{font-family:'JetBrains Mono', monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--coral); margin-bottom:4px; display:block;}
+  .tl-item h3{font-size:1.15rem; margin-bottom:4px;}
+  .tl-item p{font-size:0.92rem; line-height:1.6; color:var(--ink-soft);}
+
+  /* ===== Contact ===== */
+  #contact{text-align:center; padding-bottom:140px;}
+  .contact-big{font-size:clamp(2.4rem,7vw,5rem); margin-bottom:28px;}
+  .contact-links{display:flex; gap:16px; justify-content:center; flex-wrap:wrap;}
+
+  footer{
+    border-top:2px solid var(--ink); padding:24px 32px; display:flex; justify-content:space-between;
+    font-family:'JetBrains Mono', monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em;
+    flex-wrap:wrap; gap:10px;
+  }
+
+  .wobble:hover{animation:wobble 0.5s ease;}
+  @keyframes wobble{
+    0%,100%{transform:rotate(-2deg);}
+    50%{transform:rotate(2deg);}
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<nav>
+  <div class="nav-mark">LANA<span class="mono" style="color:var(--coral)">.</span></div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#path">Path</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div class="hero-bg-shape"></div>
+  <span class="stamp wobble">Issue No. 01 — Strategist in progress</span>
+  <h1 class="hero-name">Lana<br><em>builds things,</em><br>then runs them.</h1>
+  <p class="hero-tagline">Computer science student at UBC, with a background in design and communications and a steady habit of taking on the room nobody else wants to run. Coding and strategy are the skills I'm actively building toward one goal: leading.</p>
+  <div class="hero-ctas">
+    <a href="#work" class="btn btn-solid">See the work</a>
+    <a href="#contact" class="btn btn-outline">Get in touch</a>
+  </div>
+  <div class="scroll-cue"><span class="scroll-cue-line"></span>Scroll</div>
+</header>
+
+<section id="about" class="reveal">
+  <p class="section-tag">About</p>
+  <h2 class="section-title">From the newsroom to the codebase.</h2>
+  <div class="about-grid">
+    <div class="about-body">
+      <p>I'm an incoming second-year Computer Science student at UBC, headed toward a co-op and a degree I plan to finish in four years — not because that's expected, but because I like having a plan and beating it.</p>
+      <p>My instincts are design and communication first: years of running PR for a youth org, heading a school newspaper's opinion desk, and producing a zine taught me how to make something land with the people it's for. Code and strategy are the parts I'm actively building — the gap between where I am and where I'm headed, and I'd rather close it in public than pretend it isn't there.</p>
+      <p>UBC is a launchpad, not the destination. The long game is running things — eventually, a company.</p>
+    </div>
+    <div class="pull-quote">"I'm not the finished strategist yet. I'm the one showing the work in progress."</div>
+  </div>
+</section>
+
+<section id="skills" class="reveal">
+  <p class="section-tag">Skills</p>
+  <h2 class="section-title">What I lead with, what I'm leveling up.</h2>
+  <div class="skill-cols">
+    <div class="skill-card">
+      <h3>Design</h3>
+      <span class="skill-status status-core">Core</span>
+      <div class="chips">
+        <span class="chip">Visual identity</span>
+        <span class="chip">Layout & type</span>
+        <span class="chip">Merch & print</span>
+        <span class="chip">Responsive web</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3>Communication</h3>
+      <span class="skill-status status-core">Core</span>
+      <div class="chips">
+        <span class="chip">Writing</span>
+        <span class="chip">PR & outreach</span>
+        <span class="chip">Event coordination</span>
+        <span class="chip">Editorial voice</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3>Strategy</h3>
+      <span class="skill-status status-building">Building</span>
+      <div class="chips">
+        <span class="chip">Sponsorship</span>
+        <span class="chip">Org leadership</span>
+        <span class="chip">Planning</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3>Code</h3>
+      <span class="skill-status status-building">Building</span>
+      <div class="chips">
+        <span class="chip">React</span>
+        <span class="chip">Node / Express</span>
+        <span class="chip">PostgreSQL</span>
+        <span class="chip">API integration</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work" class="reveal">
+  <p class="section-tag">Selected work</p>
+  <h2 class="section-title">Things I've designed, built, and run.</h2>
+  <div class="project-grid">
+
+    <div class="project-card">
+      <div class="project-swatch" style="background:#D9E4D3;">St.<br>Joseph</div>
+      <div class="project-body">
+        <span class="tape" style="background:var(--leaf); color:var(--paper);">Web design</span>
+        <h3>St. Joseph Hospital Bataan — website redesign</h3>
+        <p>A full single-file rebuild: responsive across breakpoints, fluid typography, a hamburger nav for mobile, and a custom "sage & slate" color system built from scratch through several palette rounds.</p>
+        <div class="tagrow">
+          <span class="chip">HTML/CSS</span><span class="chip">Responsive</span><span class="chip">Brand color system</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-swatch" style="background:#F5C518;">Pickle<br>for Sight</div>
+      <div class="project-body">
+        <span class="tape" style="background:var(--pulse); color:var(--ink);">Merch design</span>
+        <h3>Pickle for Sight — tournament t-shirt design</h3>
+        <p>SVG mockups for a family-connected ophthalmology charity's pickleball tournament: iterated toward a hybrid mascot-plus-clean-badge concept in a yellow-green palette built for a charity event, not a corporate brand.</p>
+        <div class="tagrow">
+          <span class="chip">SVG</span><span class="chip">Mascot design</span><span class="chip">Event merch</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-swatch" style="background:#2B3A55; color:var(--paper);">Full-<br>stack</div>
+      <div class="project-body">
+        <span class="tape" style="background:var(--slate); color:var(--paper);">In progress</span>
+        <h3>Full-stack web app — resume project</h3>
+        <p>A React / Node / Express app on PostgreSQL via Supabase, with Anthropic API integration. Built specifically to push past the design-comfort zone into backend logic and environment setup — the gap I'm actively closing.</p>
+        <div class="tagrow">
+          <span class="chip">React</span><span class="chip">Express</span><span class="chip">Supabase</span><span class="chip">Anthropic API</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-swatch" style="background:#FF5A4E; color:var(--paper);">CSSS</div>
+      <div class="project-body">
+        <span class="tape" style="background:var(--coral); color:var(--paper);">Applying now</span>
+        <h3>CSSS Webmaster — application in progress</h3>
+        <p>Pursuing the Webmaster role for UBC's Computer Science Student Society: rebuilding the club website, maintaining event pages, and building internal tools, with design and front-end work as the entry point into more backend ownership.</p>
+        <div class="tagrow">
+          <span class="chip">Club infrastructure</span><span class="chip">Front-end</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="path" class="reveal">
+  <p class="section-tag">Path so far</p>
+  <h2 class="section-title">Leadership, one role at a time.</h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <span class="tl-date">Ongoing</span>
+      <h3>UBC Computer Science — B.Sc.</h3>
+      <p>Incoming second-year student, planning a co-op term and a four-year completion timeline.</p>
+    </div>
+    <div class="tl-item">
+      <span class="tl-date">Recent</span>
+      <h3>Cordis Ictum — Lead Coordinator & Head of Zine</h3>
+      <p>Ran sponsorship and event logistics while also leading the org's zine from concept to print.</p>
+    </div>
+    <div class="tl-item">
+      <span class="tl-date">Recent</span>
+      <h3>House of Lily — Co-Head of PR</h3>
+      <p>Co-led public relations and outreach strategy for the organization.</p>
+    </div>
+    <div class="tl-item">
+      <span class="tl-date">Earlier</span>
+      <h3>School newspaper — Opinion Department Head</h3>
+      <p>Led the opinion desk, setting editorial direction and sharpening writers' arguments.</p>
+    </div>
+    <div class="tl-item">
+      <span class="tl-date">Earlier</span>
+      <h3>Event coordination — choir, Christmas tree lighting, community events</h3>
+      <p>Coordinated logistics and execution across multiple community-facing events.</p>
+    </div>
+    <div class="tl-item">
+      <span class="tl-date">Academic</span>
+      <h3>PSHS-CLC — Director's List, Grades 7–11</h3>
+      <p>Maintained a 1.02 GWA across five years of senior high school.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="reveal">
+  <p class="section-tag" style="justify-content:center;">Let's talk</p>
+  <h2 class="contact-big">Say hello.</h2>
+  <p style="max-width:480px; margin:0 auto 32px; color:var(--ink-soft);">Open to roles, collaborations, and anyone building something worth running.</p>
+  <div class="contact-links">
+    <a href="mailto:your.email@example.com" class="btn btn-solid">Email</a>
+    <a href="#" class="btn btn-outline">LinkedIn</a>
+    <a href="#" class="btn btn-outline">GitHub</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Lana</span>
+  <span>Built with intent, not a template</span>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
