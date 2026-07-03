@@ -19,149 +19,124 @@
     body { font-family: 'Space Grotesk', -apple-system, sans-serif; }
   </style>
 </head>
-<body class="bg-[#f4f4f5] text-[#18181b] p-4 sm:p-6 min-h-screen flex items-center justify-center selection:bg-[#18181b] selection:text-white">
+<body class="bg-[#0b0b0c] text-[#f4f4f5] p-4 sm:p-8 min-h-screen flex items-center justify-center selection:bg-[#ff5a1f] selection:text-black">
 
   <div id="root" class="w-full max-w-[1200px]"></div>
 
   <script type="text/babel">
     function Portfolio() {
       return (
-        <div class="flex flex-col gap-5">
-          {/* ===== MASTER APPLICATION WINDOW ===== */}
-          <div class="bg-white border border-[#18181b] rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.03)] overflow-hidden flex flex-col">
+        <div class="flex flex-col gap-6 w-full animate-fade-in">
+          
+          {/* ===== HEADER & NAVIGATION ===== */}
+          <header class="flex justify-between items-center border border-[#27272a] bg-[#121214] rounded-2xl px-6 py-4">
+            <div class="font-bold text-xl tracking-tighter uppercase font-mono">
+              LANA<span class="text-[#ff5a1f]">.</span>G
+            </div>
+            <nav class="flex gap-6">
+              <a href="mailto:lanagarcia03@gmail.com" class="text-sm font-medium text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+                CONTACT
+              </a>
+            </nav>
+          </header>
+
+          {/* ===== HERO BRUTALIST DISPLAY PANEL ===== */}
+          <section class="border border-[#27272a] bg-[#121214] rounded-3xl p-6 sm:p-12 relative overflow-hidden">
+            {/* Ambient Background Glow matching the template */}
+            <div class="absolute -top-40 -right-40 w-96 h-96 bg-[#ff5a1f] opacity-[0.07] blur-[120px] pointer-events-none"></div>
             
-            {/* Top Bar / Outer Bezel */}
-            <div class="bg-[#fafafa] border-b border-[#e4e4e7] px-5 py-3 flex items-center justify-between select-none">
-              <div class="flex gap-1.5">
-                <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></span>
+            <div class="max-w-[850px] relative z-10">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#27272a] bg-[#1c1c1f] text-xs font-mono text-[#ff5a1f] tracking-widest uppercase mb-6">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#ff5a1f] animate-pulse"></span> STATUS: BUILDING
               </div>
-              <div class="font-mono text-[11px] text-[#71717a] uppercase tracking-wider">
-                lana_garcia_info_v2.0
-              </div>
-              <div class="w-[38px]"></div>
-            </div>
-
-            {/* Internal Canvas Layout */}
-            <div class="p-6 md:p-10">
               
-              {/* Nav Header Strip */}
-              <div class="flex justify-between items-center pb-3 border-b border-[#e4e4e7] mb-6">
-                <div class="font-bold text-lg tracking-tight">Lana Garcia</div>
-                <div class="flex gap-2 bg-[#eaeaea] p-1 rounded-lg border border-[#e4e4e7]">
-                  <button class="font-mono text-[12px] px-4 py-1.5 rounded-md bg-white shadow-sm text-[#18181b] font-medium">
-                    Work
-                  </button>
-                  <a 
-                    href="mailto:lanagarcia03@gmail.com" 
-                    class="font-mono text-[12px] px-4 py-1.5 rounded-md text-[#71717a] hover:text-[#18181b] font-medium transition-colors"
-                  >
-                    Contact
-                  </a>
-                </div>
+              <h1 class="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tighter uppercase leading-[0.95] mb-6">
+                COMPUTER SCIENCE AT UBC<span class="text-[#ff5a1f]">.</span> <br />
+                <span class="text-[#71717a]">BUILDING SYSTEMS TO BACK UP THE LONG GAME.</span>
+              </h1>
+              
+              <p class="text-base sm:text-lg text-[#a1a1aa] max-w-[600px] font-normal leading-relaxed mb-8">
+                Focused on scalable code architectures, clear layout metrics, and platform structure. Let the software speak for itself.
+              </p>
+
+              <div class="flex flex-wrap gap-4">
+                <a href="https://github.com/CaptainThunderbird" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-2 bg-[#ff5a1f] hover:bg-[#e04e19] text-black font-bold uppercase text-xs tracking-wider px-6 py-3.5 rounded-xl transition-all font-mono">
+                  GITHUB 
+                  <span class="inline-block transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+                </a>
+                <a href="https://www.linkedin.com/in/lana-garcia-a39166325/" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-2 border border-[#27272a] bg-[#1c1c1f] hover:bg-[#27272a] text-[#f4f4f5] font-bold uppercase text-xs tracking-wider px-6 py-3.5 rounded-xl transition-all font-mono">
+                  LINKEDIN 
+                  <span class="inline-block transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+                </a>
               </div>
-
-              {/* Profile Intro / Hero Block */}
-              <div class="mb-12">
-                <div class="font-mono text-[11px] text-[#71717a] uppercase tracking-wider mb-3">About Me</div>
-                <h1 class="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight leading-[1.15] mb-4 max-w-[900px]">
-                  Computer Science student at UBC. I'm passionate about building scalable code architectures that <span class="text-[#71717a] font-normal">empower communities.</span>
-                </h1>
-                <div class="flex gap-4 mt-6">
-                  <a href="https://github.com/CaptainThunderbird" target="_blank" rel="noopener noreferrer" class="font-mono text-[12px] font-medium border-b border-[#18181b] pb-0.5 hover:opacity-70 transition-opacity">
-                    GitHub ↗
-                  </a>
-                  <a href="https://www.linkedin.com/in/lana-garcia-a39166325/" target="_blank" rel="noopener noreferrer" class="font-mono text-[12px] font-medium border-b border-[#18181b] pb-0.5 hover:opacity-70 transition-opacity">
-                    LinkedIn ↗
-                  </a>
-                </div>
-              </div>
-
-              {/* Pipeline Section Title */}
-              <div class="font-mono text-[11px] text-[#71717a] uppercase tracking-wider mb-4">
-                Selected Code Infrastructures
-              </div>
-
-              {/* Bento Grid Layout Matrix */}
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-
-                {/* BENTO WINDOW 1: SCRAWL N SPRAWL */}
-                <div class="bg-white border border-[#18181b] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.01)] overflow-hidden flex flex-col">
-                  <div class="bg-[#fafafa] border-b border-[#e4e4e7] px-5 py-3 flex items-center justify-between select-none">
-                    <div class="flex gap-1.5">
-                      <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></span>
-                      <span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></span>
-                      <span class="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></span>
-                    </div>
-                    <div class="font-mono text-[11px] text-[#71717a]">src/scrawl_n_sprawl.py</div>
-                    <div class="w-[38px]"></div>
-                  </div>
-                  <div class="p-6 flex flex-col justify-between h-full min-h-[220px]">
-                    <div>
-                      <h3 class="text-xl font-bold tracking-tight mb-2">Scrawl N Sprawl</h3>
-                      <p class="text-[15px] leading-relaxed text-[#71717a]">
-                        A location-based campus kindness mapping system tracking regional community interactions and micro-deployments across geographical coordinates.
-                      </p>
-                    </div>
-                    <div>
-                      <div class="flex flex-wrap gap-1.5 mt-5">
-                        <span class="font-mono text-[11px] px-2.5 py-1 bg-[#f4f4f5] border border-[#e4e4e7] rounded-md text-[#18181b]">Python</span>
-                        <span class="font-mono text-[11px] px-2.5 py-1 bg-[#f4f4f5] border border-[#e4e4e7] rounded-md text-[#18181b]">Geospatial</span>
-                        <span class="font-mono text-[11px] px-2.5 py-1 bg-[#f4f4f5] border border-[#e4e4e7] rounded-md text-[#18181b]">UI/UX</span>
-                      </div>
-                      <div class="flex gap-4 mt-4">
-                        <a href="https://github.com/CaptainThunderbird" target="_blank" rel="noopener noreferrer" class="font-mono text-[12px] font-medium border-b border-[#18181b] pb-0.5 hover:opacity-70 transition-opacity">
-                          Source Code ↗
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* BENTO WINDOW 2: KUSEENA */}
-                <div class="bg-white border border-[#18181b] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.01)] overflow-hidden flex flex-col">
-                  <div class="bg-[#fafafa] border-b border-[#e4e4e7] px-5 py-3 flex items-center justify-between select-none">
-                    <div class="flex gap-1.5">
-                      <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></span>
-                      <span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></span>
-                      <span class="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></span>
-                    </div>
-                    <div class="font-mono text-[11px] text-[#71717a]">src/Kuseena.java</div>
-                    <div class="w-[38px]"></div>
-                  </div>
-                  <div class="p-6 flex flex-col justify-between h-full min-h-[220px]">
-                    <div>
-                      <h3 class="text-xl font-bold tracking-tight mb-2">Kuseena Inventory Engine</h3>
-                      <p class="text-[15px] leading-relaxed text-[#71717a]">
-                        A desktop inventory system built using rigid object-oriented architectures to handle recipe asset states and complex ingredient structural dependencies.
-                      </p>
-                    </div>
-                    <div>
-                      <div class="flex flex-wrap gap-1.5 mt-5">
-                        <span class="font-mono text-[11px] px-2.5 py-1 bg-[#f4f4f5] border border-[#e4e4e7] rounded-md text-[#18181b]">Java Core</span>
-                        <span class="font-mono text-[11px] px-2.5 py-1 bg-[#f4f4f5] border border-[#e4e4e7] rounded-md text-[#18181b]">Design Patterns</span>
-                        <span class="font-mono text-[11px] px-2.5 py-1 bg-[#f4f4f5] border border-[#e4e4e7] rounded-md text-[#18181b]">Swing UI</span>
-                      </div>
-                      <div class="flex gap-4 mt-4">
-                        <a href="https://github.com/CaptainThunderbird" target="_blank" rel="noopener noreferrer" class="font-mono text-[12px] font-medium border-b border-[#18181b] pb-0.5 hover:opacity-70 transition-opacity">
-                          Source Code ↗
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div> {/* End Bento Layout */}
-
-              {/* System Footer Strip */}
-              <div class="mt-12 pt-5 border-t border-[#e4e4e7] flex justify-between items-center font-mono text-[11px] text-[#71717a]">
-                <span>LANA_OS // SYSTEM TERMINAL</span>
-                <span>Less talking. More building.</span>
-              </div>
-
             </div>
-          </div>
+          </section>
+
+          {/* ===== HIGH-IMPACT GRID MODULES ===== */}
+          <main class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            {/* PIPELINE PROJECT 1: SCRAWL N SPRAWL */}
+            <article class="border border-[#27272a] bg-[#121214] rounded-3xl p-6 sm:p-8 flex flex-col justify-between group hover:border-[#ff5a1f]/40 transition-colors duration-300">
+              <div>
+                <div class="flex justify-between items-start mb-6">
+                  <span class="font-mono text-xs text-[#71717a] tracking-widest uppercase">01 / GEOSPATIAL</span>
+                  <span class="text-[#71717a] font-mono text-xs">PYTHON</span>
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-bold tracking-tighter uppercase mb-3 text-[#f4f4f5] group-hover:text-[#ff5a1f] transition-colors">
+                  SCRAWL N SPRAWL
+                </h3>
+                <p class="text-sm sm:text-base text-[#a1a1aa] leading-relaxed max-w-[450px]">
+                  A campus kindness mapping engine designed around geographical coordinates to track local community interactions and micro-deployments.
+                </p>
+              </div>
+              
+              <div class="mt-8">
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 bg-[#1c1c1f] border border-[#27272a] text-[#a1a1aa] rounded-md">Python</span>
+                  <span class="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 bg-[#1c1c1f] border border-[#27272a] text-[#a1a1aa] rounded-md">Geospatial</span>
+                  <span class="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 bg-[#1c1c1f] border border-[#27272a] text-[#a1a1aa] rounded-md">UI/UX</span>
+                </div>
+                <a href="https://github.com/CaptainThunderbird" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider font-bold border-b-2 border-[#27272a] hover:border-[#ff5a1f] pb-0.5 transition-colors text-[#f4f4f5]">
+                  VIEW CODEBASE ↗
+                </a>
+              </div>
+            </article>
+
+            {/* PIPELINE PROJECT 2: KUSEENA */}
+            <article class="border border-[#27272a] bg-[#121214] rounded-3xl p-6 sm:p-8 flex flex-col justify-between group hover:border-[#ff5a1f]/40 transition-colors duration-300">
+              <div>
+                <div class="flex justify-between items-start mb-6">
+                  <span class="font-mono text-xs text-[#71717a] tracking-widest uppercase">02 / ARCHITECTURE</span>
+                  <span class="text-[#71717a] font-mono text-xs">JAVA</span>
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-bold tracking-tighter uppercase mb-3 text-[#f4f4f5] group-hover:text-[#ff5a1f] transition-colors">
+                  KUSEENA CORE
+                </h3>
+                <p class="text-sm sm:text-base text-[#a1a1aa] leading-relaxed max-w-[450px]">
+                  A desktop inventory application utilizing rigid object-oriented design patterns to manage recipe state trees and ingredient asset parameters.
+                </p>
+              </div>
+              
+              <div class="mt-8">
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 bg-[#1c1c1f] border border-[#27272a] text-[#a1a1aa] rounded-md">Java Core</span>
+                  <span class="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 bg-[#1c1c1f] border border-[#27272a] text-[#a1a1aa] rounded-md">OOD Patterns</span>
+                  <span class="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 bg-[#1c1c1f] border border-[#27272a] text-[#a1a1aa] rounded-md">Swing UI</span>
+                </div>
+                <a href="https://github.com/CaptainThunderbird" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider font-bold border-b-2 border-[#27272a] hover:border-[#ff5a1f] pb-0.5 transition-colors text-[#f4f4f5]">
+                  VIEW CODEBASE ↗
+                </a>
+              </div>
+            </article>
+
+          </main>
+
+          {/* ===== HIGH-CONTRAST BRAND FOOTER ===== */}
+          <footer class="border border-[#27272a] bg-[#121214] rounded-2xl px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left font-mono text-xs text-[#71717a]">
+            <div>LANA GARCIA &copy; 2026</div>
+            <div class="uppercase tracking-widest text-[#ff5a1f]">LESS TALKING. MORE BUILDING.</div>
+          </footer>
+
         </div>
       );
     }
