@@ -1,241 +1,403 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Lana Garcia — Portfolio</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
+
   :root {
+
     --ink: #18181b;
+
     --ink-soft: #71717a;
+
     --paper: #f4f4f5;
+
     --window-bg: #ffffff;
+
     --border-color: #e4e4e7;
+
     --sys-close: #ff5f56;
+
     --sys-minimize: #ffbd2e;
+
     --sys-maximize: #27c93f;
+
   }
+
+
 
   * {margin:0;padding:0;box-sizing:border-box;}
+
   html {scroll-behavior:smooth;}
+
   body {
+
     background: var(--paper);
+
     color: var(--ink);
+
     font-family: 'Space Grotesk', -apple-system, sans-serif;
+
     padding-top: 58px;
+
   }
+
+
 
   h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; }
+
   .mono { font-family: 'JetBrains Mono', monospace; }
+
   a { color: inherit; text-decoration: none; }
 
+
+
   /* ===== OS Window Engine ===== */
+
   .os-window {
+
     background: var(--window-bg);
+
     border: 1px solid var(--border-color);
+
     border-radius: 12px;
+
     box-shadow: 0 4px 24px rgba(24, 24, 27, 0.03);
+
     overflow: hidden;
+
     margin-bottom: 24px;
+
   }
+
   
+
   .os-window-header {
+
     background: #fafafa;
+
     border-bottom: 1px solid var(--border-color);
+
     padding: 12px 20px;
+
     display: flex;
+
     align-items: center;
+
     gap: 8px;
+
   }
+
+
 
   .os-dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+
   .os-dot.close { background: var(--sys-close); }
+
   .os-dot.minimize { background: var(--sys-minimize); }
+
   .os-dot.maximize { background: var(--sys-maximize); }
 
+
+
   .os-window-title {
+
     margin-left: auto;
+
     font-family: 'JetBrains Mono', monospace;
+
     font-size: 0.72rem;
+
     color: var(--ink-soft);
+
   }
+
+
 
   .os-window-body { padding: 32px; }
 
+
+
   /* ===== Navigation ===== */
+
   nav {
+
     position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+
     display: flex; align-items: center; justify-content: space-between;
+
     padding: 14px 32px; background: rgba(255, 255, 255, 0.8);
+
     backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+
     border-bottom: 1px solid var(--border-color);
+
   }
+
   .nav-mark { font-weight: 700; font-size: 1rem; }
+
   .nav-links { display: flex; gap: 20px; list-style: none; }
+
   .nav-links a { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--ink-soft); }
+
   .nav-links a:hover { color: var(--ink); }
 
+
+
   /* ===== Layout Structures ===== */
+
   main { max-width: 1140px; margin: 0 auto; padding: 40px 24px; }
+
   .hero-headline { font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.1; margin-bottom: 12px; letter-spacing: -0.03em; }
+
   .hero-tagline { font-size: 1.1rem; color: var(--ink-soft); max-width: 600px; margin-bottom: 24px; }
+
   
+
   .matrix-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+
   @media (max-width: 760px) { .matrix-grid { grid-template-columns: 1fr; } }
 
+
+
   /* ===== UI Components ===== */
+
   .btn-tray { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+
   .btn {
+
     font-family: 'JetBrains Mono', monospace; font-size: 0.74rem;
+
     padding: 8px 16px; border-radius: 6px; border: 1px solid var(--border-color);
+
     background: var(--window-bg); display: inline-flex; align-items: center; gap: 6px;
+
   }
+
   .btn:hover { background: var(--paper); border-color: var(--ink-soft); }
+
   .btn-primary { background: var(--ink); color: #fff; border-color: var(--ink); }
+
   .btn-primary:hover { background: #27272a; }
 
+
+
   .system-tag {
+
     font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; text-transform: uppercase;
+
     padding: 3px 8px; border-radius: 4px; background: var(--paper); color: var(--ink-soft);
+
     display: inline-block; margin-bottom: 12px;
+
   }
+
+
 
   .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+
   .chip {
+
     font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; padding: 3px 8px;
+
     border: 1px solid var(--border-color); border-radius: 4px; color: var(--ink-soft);
+
   }
+
+
 
   footer {
+
     max-width: 1140px; margin: 0 auto; padding: 40px 24px 80px;
+
     border-top: 1px solid var(--border-color); display: flex; justify-content: space-between;
+
     font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--ink-soft);
+
   }
+
 </style>
+
 </head>
+
 <body>
 
+
+
 <nav>
+
   <div class="nav-mark">LANA GARCIA</div>
+
   <ul class="nav-links">
+
     <li><a href="#work">projects.sys</a></li>
+
     <li><a href="mailto:lanagarcia03@gmail.com">contact.txt</a></li>
+
   </ul>
+
 </nav>
+
+
 
 <main>
 
+
+
   <!-- ===== HERO INTANCE ===== -->
+
   <section id="hero">
+
     <div class="os-window">
+
       <div class="os-window-header">
+
         <span class="os-dot close"></span><span class="os-dot minimize"></span><span class="os-dot maximize"></span>
+
         <span class="os-window-title">system_initialized.sh</span>
+
       </div>
+
       <div class="os-window-body">
+
         <h1 class="hero-headline">Lana Garcia</h1>
+
         <p class="hero-tagline">Computer Science student at UBC. Building software, design patterns, and systems to back up the plan to run things.</p>
+
         <div class="btn-tray">
+
           <a href="mailto:lanagarcia03@gmail.com" class="btn btn-primary">Email</a>
+
           <a href="https://github.com/CaptainThunderbird" target="_blank" rel="noopener" class="btn">GitHub ↗</a>
+
           <a href="https://www.linkedin.com/in/lana-garcia-a39166325/" target="_blank" rel="noopener" class="btn">LinkedIn ↗</a>
+
         </div>
+
       </div>
+
     </div>
+
   </section>
+
+
 
   <!-- ===== SELECTED PIPELINE WORKS ===== -->
+
   <section id="work">
+
     <div class="matrix-grid">
 
+
+
       <!-- SCRAWL N SPRAWL -->
+
       <div class="os-window">
+
         <div class="os-window-header">
+
           <span class="os-dot close"></span><span class="os-dot minimize"></span><span class="os-dot maximize"></span>
+
           <span class="os-window-title">src/scrawl_n_sprawl</span>
+
         </div>
+
         <div class="os-window-body">
+
           <span class="system-tag">Location-Based App</span>
+
           <h3>Scrawl N Sprawl</h3>
+
           <p style="font-size: 0.92rem; color: var(--ink-soft); margin-top: 4px;">A campus kindness mapping system tracking community interactions and micro-deployments across geographical coordinates.</p>
+
           <div class="chips">
+
             <span class="chip">Python</span><span class="chip">UI/UX</span><span class="chip">Geospatial</span>
+
           </div>
+
           <div class="btn-tray">
+
             <a href="https://github.com/CaptainThunderbird" target="_blank" class="btn">Codebase ↗</a>
+
           </div>
+
         </div>
+
       </div>
+
+
 
       <!-- KUSEENA -->
+
       <div class="os-window">
+
         <div class="os-window-header">
+
           <span class="os-dot close"></span><span class="os-dot minimize"></span><span class="os-dot maximize"></span>
+
           <span class="os-window-title">src/kuseena</span>
+
         </div>
+
         <div class="os-window-body">
+
           <span class="system-tag">Inventory Engine</span>
+
           <h3>Kuseena</h3>
+
           <p style="font-size: 0.92rem; color: var(--ink-soft); margin-top: 4px;">Java inventory framework handling structured relationship patterns to scale ingredient and custom recipe dependencies.</p>
+
           <div class="chips">
+
             <span class="chip">Java</span><span class="chip">Object-Oriented Design</span><span class="chip">Swing UI</span>
+
           </div>
+
           <div class="btn-tray">
+
             <a href="https://github.com/CaptainThunderbird" target="_blank" class="btn">Codebase ↗</a>
-          </div>
-        </div>
-      </div>
 
-      <!-- FULL-STACK RESUME APP -->
-      <div class="os-window">
-        <div class="os-window-header">
-          <span class="os-dot close"></span><span class="os-dot minimize"></span><span class="os-dot maximize"></span>
-          <span class="os-window-title">src/ai_data_tool</span>
-        </div>
-        <div class="os-window-body">
-          <span class="system-tag">Full-Stack System</span>
-          <h3>AI Data Analytics Core</h3>
-          <p style="font-size: 0.92rem; color: var(--ink-soft); margin-top: 4px;">A React frontend anchored to an Express server tracking environment data workflows using relational database architecture and LLM APIs.</p>
-          <div class="chips">
-            <span class="chip">React</span><span class="chip">Node.js</span><span class="chip">PostgreSQL</span><span class="chip">Anthropic API</span>
           </div>
-          <div class="btn-tray">
-            <a href="https://github.com/CaptainThunderbird" target="_blank" class="btn">Source ↗</a>
-          </div>
-        </div>
-      </div>
 
-      <!-- ST JOSEPH WEBSITE REDESIGN -->
-      <div class="os-window">
-        <div class="os-window-header">
-          <span class="os-dot close"></span><span class="os-dot minimize"></span><span class="os-dot maximize"></span>
-          <span class="os-window-title">src/hospital_interface</span>
         </div>
-        <div class="os-window-body">
-          <span class="system-tag">Production Frontend</span>
-          <h3>St. Joseph Hospital Website</h3>
-          <p style="font-size: 0.92rem; color: var(--ink-soft); margin-top: 4px;">Responsive interface refactor built completely from scratch using fluid container mechanics and programmatic color layout systems.</p>
-          <div class="chips">
-            <span class="chip">HTML/CSS</span><span class="chip">Responsive Web</span><span class="chip">UI System</span>
-          </div>
-          <div class="btn-tray">
-            <a href="#" class="btn">Live View ↗</a>
-          </div>
-        </div>
+
       </div>
 
     </div>
+
   </section>
+
+
 
 </main>
 
+
+
 <footer>
+
   <span>LANA_OS // v2.026</span>
+
   <span>Less talking. More building.</span>
+
 </footer>
 
+
+
 </body>
+
 </html>
